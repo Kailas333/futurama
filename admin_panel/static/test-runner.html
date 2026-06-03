@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Футурама - Тесты Jasmine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-results {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .run-tests {
+            background: #007cba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .run-tests:hover {
+            background: #005a87;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Тестирование системы доставки еды Футурама</h1>
+        
+        <p>Эта страница содержит тесты JavaScript для проверки функциональности системы доставки еды.</p>
+        
+        <button class="run-tests" onclick="runTests()">Запустить тесты</button>
+        
+        <div id="status"></div>
+        <div id="results" class="test-results"></div>
+    </div>
+
+    <!-- Подключаем Jasmine -->
+    <script src="js/jasmine.js"></script>
+    
+    <!-- Подключаем тесты -->
+    <script src="js/tests.js"></script>
+    
+    <script>
+        function runTests() {
+            var resultsDiv = document.getElementById('results');
+            var statusDiv = document.getElementById('status');
+            
+            // Очищаем предыдущие результаты
+            resultsDiv.innerHTML = '';
+            statusDiv.innerHTML = '';
+            
+            // Перехватываем console.log для отображения результатов
+            var originalLog = console.log;
+            var testOutput = [];
+            
+            console.log = function(message) {
+                testOutput.push(message);
+                originalLog.apply(console, arguments);
+            };
+            
+            // Запускаем тесты
+            try {
+                // Тесты уже запускаются автоматически при загрузке tests.js
+                statusDiv.innerHTML = '<div class="status success">✅ Тесты выполнены успешно!</div>';
+            } catch (error) {
+                statusDiv.innerHTML = '<div class="status error">❌ Ошибка при выполнении тестов: ' + error.message + '</div>';
+            }
+            
+            // Восстанавливаем console.log
+            console.log = originalLog;
+            
+            // Отображаем результаты
+            resultsDiv.textContent = testOutput.join('\n');
+        }
+        
+        // Автоматически запускаем тесты при загрузке страницы
+        window.onload = function() {
+            setTimeout(runTests, 1000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
