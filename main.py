@@ -23,8 +23,8 @@ app.add_middleware(
 )
 
 # Подключение роутеров
-app.include_router(auth.router, prefix="/api/auth", tags=["Аутентификация"])
-app.include_router(users.router, prefix="/api/users", tags=["Пользователи"])
+app.include_router(auth.router, prefix="/api/auth", tags=["Авторизация"])
+app.include_router(users.router, prefix="/api/users", tags=["Клиенты"])
 app.include_router(restaurants.router, prefix="/api/restaurants", tags=["Рестораны"])
 app.include_router(menu.router, prefix="/api/menu", tags=["Меню"])
 app.include_router(orders.router, prefix="/api/orders", tags=["Заказы"])
